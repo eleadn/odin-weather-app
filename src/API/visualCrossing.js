@@ -14,9 +14,13 @@ export default class VisualCrossing {
 		this.includes = [];
 	}
 
-	#addToString(string, arg) {
+	#addToString(string, arg, argName = null) {
 		if (arg !== null) {
-			string = `${string}/${arg}`;
+			if (argName === null) {
+				string = `${string}/${arg}`;
+			} else {
+				string = `${string}&${argName}=${arg}`;
+			}
 		}
 		return string;
 	}
@@ -36,7 +40,8 @@ export default class VisualCrossing {
 		let result = `${this.#baseUrl}/${this.location}`;
 		result = this.#addToString(result, this.fromDate);
 		result = this.#addToString(result, this.toDate);
-		result = this.#addToString(result, unitGroup);
+		result = `${result}?key=${this.apiKey}`;
+		result = this.#addToString(result, this.unitGroup, "unitGroup");
 		result = this.#addArrayToString(result, "elements", this.elements);
 		result = this.#addArrayToString(result, "include", this.includes);
 
