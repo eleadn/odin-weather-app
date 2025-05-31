@@ -1,13 +1,10 @@
 import VisualCrossing from "../API/visualCrossing";
+import Wttr from "../API/wttr";
 import Meteo from "./meteo";
 
 export default async function getMeteo(parameters) {
-	let api = new VisualCrossing(parameters.location);
-	api.fromDate = parameters.fromDate;
-	api.toDate = parameters.toDate;
+	let api = new Wttr(parameters.location);
 	api.unitGroup = parameters.unitGroup;
-	api.parameters = ["datetime", "tempmax", "tempmin", "temp", "preciptype"];
-	api.includes = ["hours", "key"];
 
 	const meteo = await api.getMeteo();
 	return new Meteo(meteo);
