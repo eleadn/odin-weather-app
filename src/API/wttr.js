@@ -1,10 +1,8 @@
 export default class Wttr {
 	#baseUrl;
-	#unitGroup;
 
 	constructor(location) {
 		this.#baseUrl = "https://wttr.in";
-		this.#unitGroup = null;
 
 		this.location = location;
 	}
@@ -13,20 +11,8 @@ export default class Wttr {
 		return this.unitGroup;
 	}
 
-	set unitGroup(value) {
-		if (value === "us") {
-			this.#unitGroup = "u";
-		} else {
-			this.#unitGroup = "m";
-		}
-	}
-
 	#buildString() {
-		let result = `${this.#baseUrl}/${this.location}?format=j1`;
-		if (this.#unitGroup !== null) {
-			result = `${result}&${this.#unitGroup}`;
-		}
-		return result;
+		return `${this.#baseUrl}/${this.location}?format=j1`;
 	}
 
 	async getMeteo() {
