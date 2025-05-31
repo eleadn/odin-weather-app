@@ -1,0 +1,42 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	height: 100vh;
+}
+
+#display {
+	height: 100%;
+	padding: 10% 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#current-day-display {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+}
+
+#buttons {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+#days-display button {
+	padding: 1rem 2rem;
+}
+
+#hours-display button {
+	padding: 0.5rem 1rem;
+}
