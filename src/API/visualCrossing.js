@@ -1,11 +1,12 @@
 export default class VisualCrossing {
+	#apiKey;
 	#baseUrl;
 
-	constructor(apiKey, location) {
+	constructor(location) {
+		this.#apiKey = "Q6UUUWWSRDSCCRBD6XD6YCQ3R";
 		this.#baseUrl =
 			"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline";
 
-		this.apiKey = apiKey;
 		this.location = location;
 		this.fromDate = null;
 		this.toDate = null;
@@ -40,7 +41,7 @@ export default class VisualCrossing {
 		let result = `${this.#baseUrl}/${this.location}`;
 		result = this.#addToString(result, this.fromDate);
 		result = this.#addToString(result, this.toDate);
-		result = `${result}?key=${this.apiKey}`;
+		result = `${result}?key=${this.#apiKey}`;
 		result = this.#addToString(result, this.unitGroup, "unitGroup");
 		result = this.#addArrayToString(result, "elements", this.elements);
 		result = this.#addArrayToString(result, "include", this.includes);
