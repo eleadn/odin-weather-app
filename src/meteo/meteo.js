@@ -31,4 +31,9 @@ export default class Meteo {
 		const day = this.getDay(datetime);
 		return this.unitGroup === "us" ? day.mintempF : day.mintempC;
 	}
+
+	getMeteo(datetime) {
+		const hour = this.getHour(datetime);
+		return hour.weatherDesc[0].value;
+	}
 }
