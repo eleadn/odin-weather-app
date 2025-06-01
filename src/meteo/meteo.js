@@ -36,4 +36,16 @@ export default class Meteo {
 		const hour = this.getHour(datetime);
 		return hour.weatherDesc[0].value;
 	}
+
+	getTemperatureUnit() {
+		return this.unitGroup === "us" ? "F" : "C";
+	}
+
+	getLocation() {
+		const location = this.meteoStruct.nearest_area[0];
+		const areaName = location.areaName[0].value;
+		const region = location.region[0].value;
+		const country = location.country[0].value;
+		return `${areaName}, ${region}, ${country}`;
+	}
 }
