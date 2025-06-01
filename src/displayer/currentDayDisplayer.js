@@ -14,7 +14,7 @@ export default class CurrentDayDisplayer extends DisplayerBase {
 		if (meteo === null) {
 			location.toggleAttribute("readonly", true);
 		} else {
-			location.textContent = meteo.getLocation();
+			location.value = meteo.getLocation();
 		}
 
 		this._container.appendChild(location);
@@ -37,7 +37,7 @@ export default class CurrentDayDisplayer extends DisplayerBase {
 			currentDay.textContent = "#";
 			currentHour.textContent = "#";
 		} else {
-			currentDay.textContent = format(datetime, "dd-MM-yyyy");
+			currentDay.textContent = format(datetime, "dd/MM/yyyy");
 			currentHour.textContent = `${format(datetime, "hh")}h`;
 		}
 
