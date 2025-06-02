@@ -2,8 +2,12 @@ import { format } from "date-fns";
 import DisplayerBase from "./displayerBase";
 
 export default class CurrentDayDisplayer extends DisplayerBase {
+	locationChangedEvent;
+
 	constructor(container) {
 		super(container);
+
+		this.locationChangedEvent = null;
 	}
 
 	#showLocation(meteo) {
@@ -11,6 +15,10 @@ export default class CurrentDayDisplayer extends DisplayerBase {
 		location.setAttribute("name", "location");
 		location.setAttribute("placeholder", "location");
 		location.setAttribute("type", "text");
+		location.addEventListener("change", (e) => {
+			this._invokeEvent(this.locationChangedEvent, e.target.textContent);
+		});
+
 		if (meteo === null) {
 			location.toggleAttribute("readonly", true);
 		} else {

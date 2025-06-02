@@ -5,9 +5,9 @@ export default class DisplayerBase {
 		this._container = container;
 	}
 
-	_invokeListener(listener, ...args) {
-		if (listener !== null) {
-			listener(...args);
+	_invokeEvent(event, ...args) {
+		if (event !== null) {
+			event(...args);
 		}
 	}
 
