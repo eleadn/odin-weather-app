@@ -15,8 +15,8 @@ export default class CurrentDayDisplayer extends DisplayerBase {
 		location.setAttribute("name", "location");
 		location.setAttribute("placeholder", "location");
 		location.setAttribute("type", "text");
-		location.addEventListener("change", (e) => {
-			this._invokeEvent(this.locationChangedEvent, e.target.value);
+		location.addEventListener("change", () => {
+			this._invokeEvent(this.locationChangedEvent, location.value);
 		});
 
 		if (meteo === null) {
