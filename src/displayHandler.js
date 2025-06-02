@@ -1,3 +1,4 @@
+import ButtonsDisplayer from "./displayer/buttonsDisplayer";
 import CurrentDayDisplayer from "./displayer/currentDayDisplayer";
 import getMeteo from "./meteo/getMeteo";
 import MeteoParameters from "./meteo/meteoParameters";
@@ -6,6 +7,8 @@ export default class DisplayHandler {
 	#meteo;
 	#currentDatetime;
 	#currentDayDisplayer;
+
+	#buttonsDisplayer;
 
 	constructor(meteo) {
 		this.#meteo = meteo;
@@ -20,13 +23,29 @@ export default class DisplayHandler {
 		);
 		this.#setCurrentDayEvents();
 
+		const buttonsContainer = document.querySelector("#buttons");
+		this.#buttonsDisplayer = new ButtonsDisplayer(buttonsContainer);
+		this.#setButtonsEvents();
+
 		this.#currentDayDisplayer.show();
+		this.#buttonsDisplayer.show();
 	}
 
 	#setCurrentDayEvents() {
 		this.#currentDayDisplayer.locationChangedEvent = (location) => {
 			this.#onLocationChanged(location);
 		};
+	}
+
+	#setButtonsEvents() {
+		this.#buttonsDisplayer.dayClickEvent = (newDate) => {
+			this.#currentDatetime = newDate;
+			this.#displayCurrentDay();
+		};
+	}
+
+	#displayCurrentDay() {
+		this.#currentDayDisplayer.show(this.#meteo, this.#currentDatetime);
 	}
 
 	async #onLocationChanged(location) {
@@ -45,6 +64,7 @@ export default class DisplayHandler {
 	}
 
 	display() {
-		this.#currentDayDisplayer.show(this.#meteo, this.#currentDatetime);
+		this.#displayCurrentDay();
+		this.#buttonsDisplayer.show(this.#meteo, this.#currentDatetime);
 	}
 }

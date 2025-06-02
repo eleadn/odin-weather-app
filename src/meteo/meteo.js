@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 
 export default class Meteo {
 	constructor(meteoStruct, unitGroup) {
@@ -27,7 +27,7 @@ export default class Meteo {
 
 	getDate(index) {
 		const day = this.meteoStruct.weather[index];
-		return day.date;
+		return parse(day.date, "yyyy-MM-dd", new Date());
 	}
 
 	getTemperature(datetime) {
