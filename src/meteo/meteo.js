@@ -8,7 +8,11 @@ export default class Meteo {
 
 	getDay(datetime) {
 		const date = format(datetime, "yyyy-MM-dd");
-		return this.meteoStruct.weather.find((day) => day.date === date);
+		let day = this.meteoStruct.weather.find((day) => day.date === date);
+		if (day === undefined) {
+			day = this.meteoStruct.weather[0];
+		}
+		return day;
 	}
 
 	getHour(datetime) {
