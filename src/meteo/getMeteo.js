@@ -1,4 +1,3 @@
-import VisualCrossing from "../API/visualCrossing";
 import Wttr from "../API/wttr";
 import Meteo from "./meteo";
 
