@@ -17,6 +17,15 @@ export default class Meteo {
 		return day.hourly[index];
 	}
 
+	getDaysLength() {
+		return this.meteoStruct.weather.length;
+	}
+
+	getDate(index) {
+		const day = this.meteoStruct.weather[index];
+		return day.date;
+	}
+
 	getTemperature(datetime) {
 		const hour = this.getHour(datetime);
 		return this.unitGroup === "us" ? hour.tempF : hour.tempC;
