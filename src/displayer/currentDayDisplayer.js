@@ -35,10 +35,10 @@ export default class CurrentDayDisplayer extends DisplayerBase {
 
 		if (datetime === null) {
 			currentDay.textContent = "#";
-			currentHour.textContent = "#";
+			currentHour.textContent = "#:#";
 		} else {
 			currentDay.textContent = format(datetime, "dd/MM/yyyy");
-			currentHour.textContent = `${format(datetime, "hh")}h`;
+			currentHour.textContent = `${format(datetime, "HH:m")}`;
 		}
 
 		currentDate.appendChild(currentDay);
@@ -89,27 +89,45 @@ export default class CurrentDayDisplayer extends DisplayerBase {
 		const currentMax = document.createElement("span");
 		currentMax.classList.add("current-max");
 
+		const currentMaxSep = document.createElement("span");
+		currentMaxSep.textContent = "°";
+
+		const currentMaxUnit = document.createElement("span");
+
 		const maxMinSep = document.createElement("span");
 		maxMinSep.textContent = " / ";
 
 		const currentMin = document.createElement("span");
 		currentMin.classList.add("current-min");
 
+		const currentMinSep = document.createElement("span");
+		currentMinSep.textContent = "°";
+
+		const currentMinUnit = document.createElement("span");
+
 		if (meteo === null) {
 			currentMeteo.textContent = "#";
 			currentMax.textContent = "#";
 			currentMin.textContent = "#";
+			currentMaxUnit.textContent = "#";
+			currentMinUnit.textContent = "#";
 		} else {
 			currentMeteo.textContent = meteo.getMeteo(datetime);
 			currentMax.textContent = meteo.getMaxTemperature(datetime);
 			currentMin.textContent = meteo.getMinTemperature(datetime);
+			currentMaxUnit.textContent = meteo.getTemperatureUnit();
+			currentMinUnit.textContent = meteo.getTemperatureUnit();
 		}
 
 		currentInfos.appendChild(currentMeteo);
 		currentInfos.appendChild(meteoMaxSep);
 		currentInfos.appendChild(currentMax);
+		currentInfos.appendChild(currentMaxSep);
+		currentInfos.appendChild(currentMaxUnit);
 		currentInfos.appendChild(maxMinSep);
 		currentInfos.appendChild(currentMin);
+		currentInfos.appendChild(currentMinSep);
+		currentInfos.appendChild(currentMinUnit);
 
 		this._container.appendChild(currentInfos);
 	}
