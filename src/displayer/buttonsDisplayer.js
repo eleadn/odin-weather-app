@@ -21,6 +21,9 @@ export default class ButtonsDisplayer extends DisplayerBase {
 				);
 			}
 		});
+		if (meteo === null) {
+			button.toggleAttribute("disabled", true);
+		}
 
 		const date = document.createElement("div");
 

@@ -53,6 +53,9 @@ export default class DisplayHandler {
 		const minDate = this.#meteo.getDate(0);
 		const maxDate = this.#meteo.getDate(this.#meteo.getDaysLength() - 1);
 		const params = new MeteoParameters(location, minDate, maxDate, metric);
+
+		this.#meteo = null;
+		this.display();
 		this.#meteo = await getMeteo(params);
 		this.display();
 	}

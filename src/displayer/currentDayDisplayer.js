@@ -20,7 +20,7 @@ export default class CurrentDayDisplayer extends DisplayerBase {
 		});
 
 		if (meteo === null) {
-			location.toggleAttribute("readonly", true);
+			location.toggleAttribute("disabled", true);
 		} else {
 			location.value = meteo.getLocation();
 		}
