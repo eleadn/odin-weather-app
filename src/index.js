@@ -13,5 +13,4 @@ const params = new MeteoParameters(
 const displayHandler = new DisplayHandler(null);
 displayHandler.display();
 const meteo = await getMeteo(params);
-console.log(meteo.meteoStruct);
 displayHandler.updateMeteo(meteo);
