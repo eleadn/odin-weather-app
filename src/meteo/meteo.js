@@ -25,9 +25,18 @@ export default class Meteo {
 		return this.meteoStruct.weather.length;
 	}
 
+	getHoursLength(datetime) {
+		const day = this.getDay(datetime);
+		return day.hourly.length;
+	}
+
 	getDate(index) {
 		const day = this.meteoStruct.weather[index];
 		return parse(day.date, "yyyy-MM-dd", new Date());
+	}
+
+	getDateHour(index) {
+		return index * 3;
 	}
 
 	getTemperature(datetime) {

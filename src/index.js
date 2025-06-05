@@ -12,9 +12,6 @@ const params = new MeteoParameters(
 
 const displayHandler = new DisplayHandler(null);
 displayHandler.display();
-
-setTimeout(async () => {
-	const meteo = await getMeteo(params);
-	console.log(meteo.getLocation());
-	displayHandler.updateMeteo(meteo);
-}, 5000);
+const meteo = await getMeteo(params);
+console.log(meteo.meteoStruct);
+displayHandler.updateMeteo(meteo);

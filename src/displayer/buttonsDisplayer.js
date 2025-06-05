@@ -3,11 +3,56 @@ import DisplayerBase from "./displayerBase";
 
 export default class ButtonsDisplayer extends DisplayerBase {
 	dayClickEvent;
+	hourClickEvent;
 
 	constructor(container) {
 		super(container);
 
 		this.dayClickEvent = null;
+	}
+
+	#displayHoursButtons(container, meteo = null, index = null) {
+		const button = document.createElement("button");
+		button.dataset.index = index;
+		button.addEventListener("click", () => {
+			if (button.dataset.index !== null) {
+				this._invokeEvent(
+					this.hourClickEvent,
+					meteo.getDateHour(button.dataset.index)
+				);
+			}
+		});
+		if (meteo === null) {
+			button.toggleAttribute("disabled", true);
+		}
+
+		const hourDisplay = document.createElement("div");
+
+		if (meteo === null) {
+			hourDisplay.textContent = "#h";
+		} else {
+			const hour = meteo.getDateHour(index);
+			hourDisplay.textContent = `${hour}h`;
+		}
+
+		button.appendChild(hourDisplay);
+
+		container.appendChild(button);
+	}
+
+	#displayHours(meteo = null, datetime = null) {
+		const hoursContainer = document.createElement("div");
+		hoursContainer.id = "hours-display";
+
+		if (meteo === null) {
+			this.#displayHoursButtons(hoursContainer);
+		} else {
+			for (let i = 0; i < meteo.getHoursLength(datetime); ++i) {
+				this.#displayHoursButtons(hoursContainer, meteo, i);
+			}
+		}
+
+		this._container.appendChild(hoursContainer);
 	}
 
 	#displayDayButton(container, meteo = null, index = null) {
@@ -94,5 +139,6 @@ export default class ButtonsDisplayer extends DisplayerBase {
 		super.show();
 
 		this.#displayDays(meteo);
+		this.#displayHours(meteo, datetime);
 	}
 }

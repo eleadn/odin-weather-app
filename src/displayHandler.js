@@ -42,6 +42,10 @@ export default class DisplayHandler {
 			this.#currentDatetime = newDate;
 			this.#displayCurrentDay();
 		};
+		this.#buttonsDisplayer.hourClickEvent = (newHour) => {
+			this.#currentDatetime.setHours(newHour, 0, 0, 0);
+			this.#displayCurrentDay();
+		};
 	}
 
 	#displayCurrentDay() {
